@@ -37,7 +37,7 @@
 | ---------------- | ----------------- | ------------------------- |
 | orderMenuitem_id | INT > 0, NOT NULL | PrimaryKey                |
 | menuitem_id      |                   | ForeignKey на Menuitem    |
-| amount           |                   |                           |
+| amount           | INT > 0, NOT NULL |                           |
 
 - **Menuitem**
 
