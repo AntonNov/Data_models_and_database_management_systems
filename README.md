@@ -15,27 +15,27 @@
 
 - **User**
 
-| Название | Описание              | Дополнительная информация                                                                                  |
-| -------- | --------------------- | ---------------------------------------------------------------------------------------------------------- |
-| user_id  | SERIAL                | PrimaryKey                                                                                                 |
-| name     | VARCHAR(30), NOT NULL |
-| phone    | CHAR(10), NOT NULL    | +375 (двузначный код оператора) XXX-XXXX, альтернативный ключ                                              |
-| points   | INT > 0, NOT NULL     | баллы начисляются за покупку в эквиваленте 1 BYN = 10 points; возможна покупка в магазине чего-то за баллы |
+| Название | Описание             | Дополнительная информация                                                                                  |
+| -------- | -------------------- | ---------------------------------------------------------------------------------------------------------- |
+| user_id  | SERIAL NOT NULL      | PrimaryKey                                                                                                 |
+| name     | VARCHAR(30) NOT NULL |
+| phone    | CHAR(10) NOT NULL    | +375 (двузначный код оператора) XXX-XXXX, альтернативный ключ                                              |
+| points   | INT > 0, NOT NULL    | баллы начисляются за покупку в эквиваленте 1 BYN = 10 points; возможна покупка в магазине чего-то за баллы |
 
 - **Order**
 
 | Название  | Описание          | Дополнительная информация |
 | --------- | ----------------- | ------------------------- |
-| order_id  | SERIAL            | PrimaryKey                |
+| order_id  | SERIAL NOT NULL   | PrimaryKey                |
 | user_id   | INT > 0, NOT NULL | ForeignKey на User        |
-| time      | TIME, NOT NULL    |                           |
+| time      | TIME NOT NULL     |                           |
 | total_sum | INT > 0, NOT NULL |                           |
 
 - **OrderMenuitem**
 
 | Название         | Описание          | Дополнительная информация |
 | ---------------- | ----------------- | ------------------------- |
-| orderMenuitem_id | SERIAL            | PrimaryKey                |
+| orderMenuitem_id | SERIAL NOT NULL   | PrimaryKey                |
 | menuitem_id      | INT > 0, NOT NULL | ForeignKey на Menuitem    |
 | amount           | INT > 0, NOT NULL |                           |
 
@@ -43,7 +43,7 @@
 
 | Название    | Описание          | Дополнительная информация |
 | ----------- | ----------------- | ------------------------- |
-| menuitem_id | SERIAL            | PrimaryKey                |
+| menuitem_id | SERIAL NOT NULL   | PrimaryKey                |
 | name        | VARCHAR(50)       |                           |
 | description | VARCHAR(300)      |                           |
 | calories    | INT > 0, NOT NULL |                           |
@@ -51,19 +51,19 @@
 
 - **Menu**
 
-| Название        | Описание       | Дополнительная информация |
-| --------------- | -------------- | ------------------------- |
-| menu_id         | SERIAL         | PrimaryKey                |
-| name            | VARCHAR(50)    |                           |
-| description     | VARCHAR(300)   |                           |
-| menu_start_time | TIME, NOT NULL |                           |
-| menu_end_time   | TIME, NOT NULL |                           |
+| Название        | Описание        | Дополнительная информация |
+| --------------- | --------------- | ------------------------- |
+| menu_id         | SERIAL NOT NULL | PrimaryKey                |
+| name            | VARCHAR(50)     |                           |
+| description     | VARCHAR(300)    |                           |
+| menu_start_time | TIME, NOT NULL  |                           |
+| menu_end_time   | TIME, NOT NULL  |                           |
 
 - **Product**
 
 | Название       | Описание          | Дополнительная информация |
 | -------------- | ----------------- | ------------------------- |
-| product_id     | SERIAL            | PrimaryKey                |
+| product_id     | SERIAL NOT NULL   | PrimaryKey                |
 | name           | VARCHAR(30)       |                           |
 | description    | VARCHAR(300)      |                           |
 | type_id        | INT > 0, NOT NULL | ForeignKey на Type        |
@@ -74,7 +74,7 @@
 
 | Название     | Описание          | Дополнительная информация |
 | ------------ | ----------------- | ------------------------- |
-| type_id      | SERIAL            | PrimaryKey                |
+| type_id      | SERIAL NOT NULL   | PrimaryKey                |
 | product_type | Enum product_type |                           |
 
 Enum product_type (сoffee, dessert)
