@@ -35,40 +35,40 @@
 
 | Название         | Описание          | Дополнительная информация |
 | ---------------- | ----------------- | ------------------------- |
-| orderMenuitem_id | SERIAL NOT NULL   | PrimaryKey                |
-| menuitem_id      | INT > 0, NOT NULL | ForeignKey на Menuitem    |
+| orderMenuItem_id | SERIAL NOT NULL   | PrimaryKey                |
+| menuItem_id      | INT > 0, NOT NULL | ForeignKey на MenuItem    |
 | amount           | INT > 0, NOT NULL |                           |
 
 - **MenuItem**
 
-| Название    | Описание          | Дополнительная информация |
-| ----------- | ----------------- | ------------------------- |
-| menuitem_id | SERIAL NOT NULL   | PrimaryKey                |
-| name        | VARCHAR(50)       |                           |
-| description | VARCHAR(300)      |                           |
-| calories    | INT > 0, NOT NULL |                           |
-| price       | INT > 0, NOT NULL |                           |
+| Название    | Описание              | Дополнительная информация |
+| ----------- | --------------------- | ------------------------- |
+| menuItem_id | SERIAL NOT NULL       | PrimaryKey                |
+| name        | VARCHAR(50) NOT NULL  |                           |
+| description | VARCHAR(300) NOT NULL |                           |
+| calories    | INT > 0, NOT NULL     |                           |
+| price       | INT > 0, NOT NULL     |                           |
 
 - **Menu**
 
-| Название        | Описание        | Дополнительная информация |
-| --------------- | --------------- | ------------------------- |
-| menu_id         | SERIAL NOT NULL | PrimaryKey                |
-| name            | VARCHAR(50)     |                           |
-| description     | VARCHAR(300)    |                           |
-| menu_start_time | TIME, NOT NULL  |                           |
-| menu_end_time   | TIME, NOT NULL  |                           |
+| Название        | Описание              | Дополнительная информация |
+| --------------- | --------------------- | ------------------------- |
+| menu_id         | SERIAL NOT NULL       | PrimaryKey                |
+| name            | VARCHAR(50) NOT NULL  |                           |
+| description     | VARCHAR(300) NOT NULL |                           |
+| menu_start_time | TIME NOT NULL         |                           |
+| menu_end_time   | TIME NOT NULL         |                           |
 
 - **Product**
 
-| Название       | Описание          | Дополнительная информация |
-| -------------- | ----------------- | ------------------------- |
-| product_id     | SERIAL NOT NULL   | PrimaryKey                |
-| name           | VARCHAR(30)       |                           |
-| description    | VARCHAR(300)      |                           |
-| type_id        | INT > 0, NOT NULL | ForeignKey на Type        |
-| origin_country | TIME, NOT NULL    |                           |
-| price_in_kg    | INT > 0, NOT NULL |                           |
+| Название       | Описание              | Дополнительная информация |
+| -------------- | --------------------- | ------------------------- |
+| product_id     | SERIAL NOT NULL       | PrimaryKey                |
+| name           | VARCHAR(30) NOT NULL  |                           |
+| description    | VARCHAR(300) NOT NULL |                           |
+| type_id        | INT > 0, NOT NULL     | ForeignKey на Type        |
+| origin_country | VARCHAR(30) NOT NULL  |                           |
+| price_in_kg    | INT > 0, NOT NULL     |                           |
 
 - **Type**
 
