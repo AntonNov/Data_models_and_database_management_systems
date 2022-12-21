@@ -66,7 +66,7 @@
 | product_id     | INT > 0, NOT NULL | PrimaryKey                |
 | name           | VARCHAR(30)       |                           |
 | description    | VARCHAR(300)      |                           |
-| type_id        | VARCHAR(30)       | ForeignKey на Type        |
+| type_id        |                   | ForeignKey на Type        |
 | origin_country | TIME, NOT NULL    |                           |
 | price_in_kg    | INT > 0, NOT NULL |                           |
 
