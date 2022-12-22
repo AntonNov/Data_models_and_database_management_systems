@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS _order (
 
 CREATE TABLE IF NOT EXISTS order_menu_item ( 
   id                SERIAL NOT NULL,
+  _order_id  INT NOT NULL ,
   menu_item_id  INT NOT NULL ,
   amount   INT NOT NULL,
   CONSTRAINT "PK_order_menu_item" PRIMARY KEY (id)
@@ -44,7 +45,7 @@ CREATE TABLE IF NOT EXISTS menu (
 
 CREATE TABLE IF NOT EXISTS product ( 
   id                SERIAL NOT NULL,
-  name    VARCHAR(30) NOT NULL ,
+  name    VARCHAR(50) NOT NULL,
   description  VARCHAR(300) NOT NULL,
   type_id    INT NOT NULL,
   origin_country  VARCHAR(30) NOT NULL,
@@ -52,7 +53,7 @@ CREATE TABLE IF NOT EXISTS product (
   CONSTRAINT "PK_product" PRIMARY KEY (id)
 );
 
-CREATE TYPE product_type AS ENUM ('coffee', 'dessert');
+CREATE TYPE IF NOT exists product_type AS ENUM ('coffee', 'dessert');
 
 CREATE TABLE IF NOT EXISTS _type ( 
   id            SERIAL NOT NULL,

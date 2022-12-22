@@ -36,6 +36,7 @@
 | Название         | Описание          | Дополнительная информация |
 | ---------------- | ----------------- | ------------------------- |
 | orderMenuItem_id | SERIAL NOT NULL   | PrimaryKey                |
+| order_id         | INT > 0, NOT NULL | ForeignKey на Order       |
 | menuItem_id      | INT > 0, NOT NULL | ForeignKey на MenuItem    |
 | amount           | INT > 0, NOT NULL |                           |
 
