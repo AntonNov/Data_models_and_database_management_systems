@@ -2,76 +2,73 @@ DROP SCHEMA IF EXISTS public CASCADE;
 CREATE SCHEMA IF NOT EXISTS public;
 
 CREATE TABLE IF NOT EXISTS _user ( 
-  id                SERIAL NOT NULL,
-  name    VARCHAR(30) NOT NULL ,
-  phone    CHAR(10) NOT NULL,
-  points    INT NOT NULL,
-  CONSTRAINT "PK_user" PRIMARY KEY (id)
+  id    SERIAL PRIMARY KEY,
+  name  VARCHAR(30) NOT NULL ,
+  phone CHAR(10) NOT NULL,
+  points    INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS _order ( 
-  id                SERIAL NOT NULL,
-  user_id   INT NOT NULL ,
+  id  SERIAL PRIMARY KEY,
+  user_id INT NOT NULL,
+  FOREIGN KEY (user_id)  REFERENCES _user (Id) ,
   time    TIME NOT NULL,
-  total_sum   INT NOT NULL,
-  CONSTRAINT "PK_order" PRIMARY KEY (id)
+  total_sum   INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS order_menu_item ( 
-  id                SERIAL NOT NULL,
-  _order_id  INT NOT NULL ,
-  menu_item_id  INT NOT NULL ,
-  amount   INT NOT NULL,
-  CONSTRAINT "PK_order_menu_item" PRIMARY KEY (id)
+  id SERIAL PRIMARY KEY,
+  order_id INT NOT NULL,
+  menu_item_id  INT NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES _order (Id),
+  FOREIGN KEY (menu_item_id) REFERENCES menu_item (Id),
+  amount   INT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS menu_item ( 
-  id                SERIAL NOT NULL,
+  id SERIAL PRIMARY KEY,
   name    VARCHAR(50) NOT NULL ,
   description  VARCHAR(300) NOT NULL,
   calories    INT NOT NULL,
-  price    INT NOT NULL,
-  CONSTRAINT "PK_menu_item" PRIMARY KEY (id)
+  price    INT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS menu ( 
-  id                SERIAL NOT NULL,
-  name    VARCHAR(50) NOT NULL ,
-  description  VARCHAR(300) NOT NULL,
-  menu_start_time  TIME NOT NULL,
-  menu_end_time  TIME NOT NULL,
-  CONSTRAINT "PK_menu" PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS product ( 
-  id                SERIAL NOT NULL,
-  name    VARCHAR(50) NOT NULL,
-  description  VARCHAR(300) NOT NULL,
-  type_id    INT NOT NULL,
-  origin_country  VARCHAR(30) NOT NULL,
-  price_in_kg   INT NOT NULL,
-  CONSTRAINT "PK_product" PRIMARY KEY (id)
-);
-
-CREATE TYPE IF NOT exists product_type AS ENUM ('coffee', 'dessert');
+CREATE TYPE product_type AS ENUM ('coffee', 'dessert');
 
 CREATE TABLE IF NOT EXISTS _type ( 
-  id            SERIAL NOT NULL,
+  id  SERIAL PRIMARY KEY,
   name    product_type NOT NULL,
   CONSTRAINT "PK_type" PRIMARY KEY (id)
 );
 
-ALTER TABLE _order
-    ADD CONSTRAINT "fk_order_user"
-        FOREIGN KEY ("user_id")
-            REFERENCES _user (id) ON DELETE CASCADE;
-           
-ALTER TABLE order_menu_item
-    ADD CONSTRAINT "fk_order_menu_item"
-        FOREIGN KEY ("menu_item_id")
-            REFERENCES menu_item (id) ON DELETE CASCADE;
-           
-ALTER TABLE product
-    ADD CONSTRAINT "fk_product_type"
-        FOREIGN KEY ("type_id")
-            REFERENCES _type (id) ON DELETE CASCADE;
+CREATE TABLE IF NOT EXISTS product ( 
+  id  SERIAL PRIMARY KEY,
+  name    VARCHAR(50) NOT NULL ,
+  description  VARCHAR(300) NOT NULL,
+  type_id    INT NOT NULL,
+  FOREIGN KEY (type_id)  REFERENCES _type (Id) ,
+  origin_country  VARCHAR(30) NOT NULL,
+  price_in_kg   INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS menu ( 
+  id  SERIAL PRIMARY KEY,
+  name    VARCHAR(50) NOT NULL ,
+  description  VARCHAR(300) NOT NULL,
+  menu_start_time  TIME NOT NULL,
+  menu_end_time  TIME NOT NULL,
+);
+
+CREATE TABLE IF NOT EXISTS menu_menu_item (  
+    menu_id    INT NOT NULL,
+    menu_item_id INT NOT NULL,
+    FOREIGN KEY (menu_id)  REFERENCES menu (Id),
+    FOREIGN KEY (menu_item_id)  REFERENCES menu_item (Id)
+)
+
+CREATE TABLE IF NOT EXISTS menu_item_product (  
+    product_id    INT NOT NULL,
+    menu_item_id INT NOT NULL,
+    FOREIGN KEY (product_id)  REFERENCES product (Id),
+    FOREIGN KEY (menu_item_id)  REFERENCES menu_item (Id)
+)
