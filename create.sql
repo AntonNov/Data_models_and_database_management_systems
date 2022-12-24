@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS order_menu_item (
   FOREIGN KEY (menu_item_id) REFERENCES menu_item (Id),
   amount  INT NOT NULL
 );
+
 CREATE TABLE IF NOT EXISTS menu ( 
   id  SERIAL PRIMARY KEY,
   name  VARCHAR(50) NOT NULL ,
@@ -46,6 +47,7 @@ CREATE TABLE IF NOT EXISTS menu_menu_item (
     FOREIGN KEY (menu_id)  REFERENCES menu (Id),
     FOREIGN KEY (menu_item_id)  REFERENCES menu_item (Id)
 );
+
 CREATE TYPE product_type AS ENUM ('coffee', 'dessert');
 
 CREATE TABLE IF NOT EXISTS _type ( 
