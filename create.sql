@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS menu_item (
   name  VARCHAR(50) NOT NULL ,
   food_type food_type NOT NULL,
   description  VARCHAR(300) NOT NULL,
+  weight INT NOT NULL,
   calories  INT NOT NULL,
   price INT NOT NULL
 );
@@ -44,6 +45,7 @@ CREATE TABLE IF NOT EXISTS menu (
   menu_end_time  TIME NOT NULL
 );
 
+-- связь мгогие-ко-многим между menu и menu_item
 CREATE TABLE IF NOT EXISTS menu_menu_item (  
     menu_id INT NOT NULL,
     menu_item_id INT NOT NULL,
@@ -59,6 +61,7 @@ CREATE TABLE IF NOT EXISTS product (
   price_in_kg INT NOT NULL
 );
 
+-- связь мгогие-ко-многим между menu_item и product
 CREATE TABLE IF NOT EXISTS menu_item_product (  
     product_id    INT NOT NULL,
     menu_item_id INT NOT NULL,

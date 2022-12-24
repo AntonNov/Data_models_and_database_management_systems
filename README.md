@@ -48,8 +48,9 @@ Enum food_type (сoffee, dessert)
 | ----------- | --------------------- | ------------------------- |
 | menuItem_id | SERIAL NOT NULL       | PrimaryKey                |
 | name        | VARCHAR(50) NOT NULL  |                           |
-| food_type   | ENUM foodtype         |
+| food_type   | ENUM food_type        |                           |
 | description | VARCHAR(300) NOT NULL |                           |
+| weight      | INT >0, NOT NULL      |
 | calories    | INT > 0, NOT NULL     |                           |
 | price       | INT > 0, NOT NULL     |                           |
 
