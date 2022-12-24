@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS _user (
 CREATE TABLE IF NOT EXISTS _order ( 
   id  SERIAL PRIMARY KEY,
   user_id INT NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES _user (Id),
+  FOREIGN KEY (user_id) REFERENCES _user (id),
   time  TIME NOT NULL,
   total_sum INT NOT NULL
 );
@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS order_menu_item (
   id SERIAL PRIMARY KEY,
   order_id INT NOT NULL,
   menu_item_id  INT NOT NULL,
-  FOREIGN KEY (order_id) REFERENCES _order (Id),
-  FOREIGN KEY (menu_item_id) REFERENCES menu_item (Id),
+  FOREIGN KEY (order_id) REFERENCES _order (id),
+  FOREIGN KEY (menu_item_id) REFERENCES menu_item (id),
   amount  INT NOT NULL
 );
 
@@ -44,23 +44,17 @@ CREATE TABLE IF NOT EXISTS menu (
 CREATE TABLE IF NOT EXISTS menu_menu_item (  
     menu_id INT NOT NULL,
     menu_item_id INT NOT NULL,
-    FOREIGN KEY (menu_id)  REFERENCES menu (Id),
-    FOREIGN KEY (menu_item_id)  REFERENCES menu_item (Id)
+    FOREIGN KEY (menu_id)  REFERENCES menu (id),
+    FOREIGN KEY (menu_item_id)  REFERENCES menu_item (id)
 );
 
 CREATE TYPE product_type AS ENUM ('coffee', 'dessert');
-
-CREATE TABLE IF NOT EXISTS _type ( 
-  id  SERIAL PRIMARY KEY,
-  name  product_type NOT NULL
-);
 
 CREATE TABLE IF NOT EXISTS product ( 
   id  SERIAL PRIMARY KEY,
   name  VARCHAR(50) NOT NULL ,
   description  VARCHAR(300) NOT NULL,
-  type_id INT NOT NULL,
-  FOREIGN KEY (type_id) REFERENCES _type (Id),
+  product_type product_type NOT NULL,
   origin_country  VARCHAR(30) NOT NULL,
   price_in_kg INT NOT NULL
 );
@@ -68,6 +62,6 @@ CREATE TABLE IF NOT EXISTS product (
 CREATE TABLE IF NOT EXISTS menu_item_product (  
     product_id    INT NOT NULL,
     menu_item_id INT NOT NULL,
-    FOREIGN KEY (product_id)  REFERENCES product (Id),
-    FOREIGN KEY (menu_item_id)  REFERENCES menu_item (Id)
+    FOREIGN KEY (product_id)  REFERENCES product (id),
+    FOREIGN KEY (menu_item_id)  REFERENCES menu_item (id)
 );

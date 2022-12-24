@@ -67,16 +67,9 @@
 | product_id     | SERIAL NOT NULL       | PrimaryKey                |
 | name           | VARCHAR(30) NOT NULL  |                           |
 | description    | VARCHAR(300) NOT NULL |                           |
-| type_id        | INT > 0, NOT NULL     | ForeignKey на Type        |
+| product_type   | Enum product_type     |                           |
 | origin_country | VARCHAR(30) NOT NULL  |                           |
 | price_in_kg    | INT > 0, NOT NULL     |                           |
-
-- **Type**
-
-| Название     | Описание          | Дополнительная информация |
-| ------------ | ----------------- | ------------------------- |
-| type_id      | SERIAL NOT NULL   | PrimaryKey                |
-| product_type | Enum product_type |                           |
 
 Enum product_type (сoffee, dessert)
 
