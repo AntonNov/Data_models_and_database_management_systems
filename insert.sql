@@ -14,12 +14,6 @@ VALUES
 (4, '13:14:42', 18),
 (5, '13:14:42', 3);
 
-
-
-
-
-
-
-
-
-
+INSERT INTO product (name, description, calories, price)
+VALUES
+('')

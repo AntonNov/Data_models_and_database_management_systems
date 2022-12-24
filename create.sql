@@ -16,9 +16,12 @@ CREATE TABLE IF NOT EXISTS _order (
   total_sum INT NOT NULL
 );
 
+CREATE TYPE food_type AS ENUM ('coffee', 'dessert');
+
 CREATE TABLE IF NOT EXISTS menu_item ( 
   id SERIAL PRIMARY KEY,
   name  VARCHAR(50) NOT NULL ,
+  food_type food_type NOT NULL,
   description  VARCHAR(300) NOT NULL,
   calories  INT NOT NULL,
   price INT NOT NULL
@@ -48,13 +51,10 @@ CREATE TABLE IF NOT EXISTS menu_menu_item (
     FOREIGN KEY (menu_item_id)  REFERENCES menu_item (id)
 );
 
-CREATE TYPE product_type AS ENUM ('coffee', 'dessert');
-
 CREATE TABLE IF NOT EXISTS product ( 
   id  SERIAL PRIMARY KEY,
   name  VARCHAR(50) NOT NULL ,
   description  VARCHAR(300) NOT NULL,
-  product_type product_type NOT NULL,
   origin_country  VARCHAR(30) NOT NULL,
   price_in_kg INT NOT NULL
 );
