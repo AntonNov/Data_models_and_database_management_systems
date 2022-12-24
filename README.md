@@ -40,12 +40,15 @@
 | menuItem_id      | INT > 0, NOT NULL | ForeignKey на MenuItem    |
 | amount           | INT > 0, NOT NULL |                           |
 
+Enum food_type (сoffee, dessert)
+
 - **MenuItem**
 
 | Название    | Описание              | Дополнительная информация |
 | ----------- | --------------------- | ------------------------- |
 | menuItem_id | SERIAL NOT NULL       | PrimaryKey                |
 | name        | VARCHAR(50) NOT NULL  |                           |
+| food_type   | ENUM foodtype         |
 | description | VARCHAR(300) NOT NULL |                           |
 | calories    | INT > 0, NOT NULL     |                           |
 | price       | INT > 0, NOT NULL     |                           |
@@ -67,11 +70,8 @@
 | product_id     | SERIAL NOT NULL       | PrimaryKey                |
 | name           | VARCHAR(30) NOT NULL  |                           |
 | description    | VARCHAR(300) NOT NULL |                           |
-| product_type   | Enum product_type     |                           |
 | origin_country | VARCHAR(30) NOT NULL  |                           |
 | price_in_kg    | INT > 0, NOT NULL     |                           |
-
-Enum product_type (сoffee, dessert)
 
 Реализованная база данных ([create.sql](create.sql)):
 ![image](realization.png)
