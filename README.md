@@ -19,7 +19,7 @@
 | -------- | -------------------- | ---------------------------------------------------------------------------------------------------------- |
 | user_id  | SERIAL NOT NULL      | PrimaryKey                                                                                                 |
 | name     | VARCHAR(30) NOT NULL |
-| phone    | CHAR(10) NOT NULL    | +375 (двузначный код оператора) XXX-XXXX, альтернативный ключ                                              |
+| phone    | CHAR(9) NOT NULL     | +375 (двузначный код оператора) XXX-XXXX, альтернативный ключ                                              |
 | points   | INT > 0, NOT NULL    | баллы начисляются за покупку в эквиваленте 1 BYN = 10 points; возможна покупка в магазине чего-то за баллы |
 
 - **Order**
@@ -79,6 +79,9 @@
 | product_type | Enum product_type |                           |
 
 Enum product_type (сoffee, dessert)
+
+Реализованная база данных ([create.sql](create.sql)):
+![image](realization.png)
 
 Функциональные требования к проекту:
 
