@@ -24,12 +24,12 @@
 
 - **Order**
 
-| Название  | Описание          | Дополнительная информация |
-| --------- | ----------------- | ------------------------- |
-| order_id  | SERIAL NOT NULL   | PrimaryKey                |
-| user_id   | INT > 0, NOT NULL | ForeignKey на User        |
-| time      | TIME NOT NULL     |                           |
-| total_sum | INT > 0, NOT NULL |                           |
+| Название  | Описание           | Дополнительная информация |
+| --------- | ------------------ | ------------------------- |
+| order_id  | SERIAL NOT NULL    | PrimaryKey                |
+| user_id   | INT > 0, NOT NULL  | ForeignKey на User        |
+| time      | TIMESTAMP NOT NULL |                           |
+| total_sum | INT > 0, NOT NULL  |                           |
 
 - **OrderMenuItem**
 
@@ -61,8 +61,8 @@ Enum food_type (сoffee, dessert)
 | menu_id         | SERIAL NOT NULL       | PrimaryKey                |
 | name            | VARCHAR(50) NOT NULL  |                           |
 | description     | VARCHAR(300) NOT NULL |                           |
-| menu_start_time | TIME NOT NULL         |                           |
-| menu_end_time   | TIME NOT NULL         |                           |
+| menu_start_time | TIMESTAMP NOT NULL    |                           |
+| menu_end_time   | TIMESTAMP NOT NULL    |                           |
 
 - **Product**
 
