@@ -33,12 +33,12 @@
 
 - **OrderMenuItem**
 
-| Название         | Описание          | Дополнительная информация |
-| ---------------- | ----------------- | ------------------------- |
-| orderMenuItem_id | SERIAL NOT NULL   | PrimaryKey                |
-| order_id         | INT > 0, NOT NULL | ForeignKey на Order       |
-| menuItem_id      | INT > 0, NOT NULL | ForeignKey на MenuItem    |
-| amount           | INT > 0, NOT NULL |                           |
+| Название         | Описание                    | Дополнительная информация |
+| ---------------- | --------------------------- | ------------------------- |
+| orderMenuItem_id | SERIAL NOT NULL             | PrimaryKey                |
+| order_id         | INT > 0, NOT NULL           | ForeignKey на Order       |
+| menuItem_id      | INT > 0, NOT NULL           | ForeignKey на MenuItem    |
+| amount           | INT > 0, DEFAULT 1 NOT NULL |                           |
 
 Enum food_type (сoffee, dessert, tea)
 
@@ -48,8 +48,8 @@ Enum food_type (сoffee, dessert, tea)
 | ----------- | --------------------- | ------------------------- |
 | menuItem_id | SERIAL NOT NULL       | PrimaryKey                |
 | name        | VARCHAR(50) NOT NULL  |                           |
-| food_type   | ENUM food_type        | ForeignKey на Menu        |
-| menu_id     | INT > 0, NOT NULL     |                           |
+| food_type   | ENUM food_type        |                           |
+| menu_id     | INT > 0, NOT NULL     | ForeignKey на Menu        |
 | description | VARCHAR(300) NOT NULL |                           |
 | weight      | INT >0, NOT NULL      |
 | calories    | INT > 0, NOT NULL     |                           |
