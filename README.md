@@ -15,12 +15,12 @@
 
 - **User**
 
-| Название | Описание             | Дополнительная информация                                                                                  |
-| -------- | -------------------- | ---------------------------------------------------------------------------------------------------------- |
-| user_id  | SERIAL NOT NULL      | PrimaryKey                                                                                                 |
-| name     | VARCHAR(30) NOT NULL |
-| phone    | CHAR(9) NOT NULL     | +375 (двузначный код оператора) XXX-XXXX, альтернативный ключ                                              |
-| points   | INT > 0, NOT NULL    | баллы начисляются за покупку в эквиваленте 1 BYN = 10 points; возможна покупка в магазине чего-то за баллы |
+| Название | Описание                    | Дополнительная информация                                                                                  |
+| -------- | --------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| user_id  | SERIAL NOT NULL             | PrimaryKey                                                                                                 |
+| name     | VARCHAR(30) NOT NULL        |
+| phone    | CHAR(9) NOT NULL            | +375 (двузначный код оператора) XXX-XXXX, альтернативный ключ                                              |
+| points   | INT > 0, DEFAULT 0 NOT NULL | баллы начисляются за покупку в эквиваленте 1 BYN = 10 points; возможна покупка в магазине чего-то за баллы |
 
 - **Order**
 
@@ -29,7 +29,7 @@
 | order_id  | SERIAL NOT NULL    | PrimaryKey                |
 | user_id   | INT > 0, NOT NULL  | ForeignKey на User        |
 | time      | TIMESTAMP NOT NULL |                           |
-| total_sum | INT > 0, NOT NULL  |                           |
+| total_sum | REAL > 0, NOT NULL |                           |
 
 - **OrderMenuItem**
 
@@ -40,7 +40,7 @@
 | menuItem_id      | INT > 0, NOT NULL | ForeignKey на MenuItem    |
 | amount           | INT > 0, NOT NULL |                           |
 
-Enum food_type (сoffee, dessert)
+Enum food_type (сoffee, dessert, tea)
 
 - **MenuItem**
 
@@ -48,11 +48,12 @@ Enum food_type (сoffee, dessert)
 | ----------- | --------------------- | ------------------------- |
 | menuItem_id | SERIAL NOT NULL       | PrimaryKey                |
 | name        | VARCHAR(50) NOT NULL  |                           |
-| food_type   | ENUM food_type        |                           |
+| food_type   | ENUM food_type        | ForeignKey на Menu        |
+| menu_id     | INT > 0, NOT NULL     |                           |
 | description | VARCHAR(300) NOT NULL |                           |
 | weight      | INT >0, NOT NULL      |
 | calories    | INT > 0, NOT NULL     |                           |
-| price       | INT > 0, NOT NULL     |                           |
+| price       | REAL > 0, NOT NULL    |                           |
 
 - **Menu**
 
@@ -72,7 +73,7 @@ Enum food_type (сoffee, dessert)
 | name           | VARCHAR(30) NOT NULL  |                           |
 | description    | VARCHAR(300) NOT NULL |                           |
 | origin_country | VARCHAR(30) NOT NULL  |                           |
-| price_in_kg    | INT > 0, NOT NULL     |                           |
+| price_in_kg    | REAL > 0, NOT NULL    |                           |
 
 Реализованная база данных ([create.sql](create.sql)):
 ![image](realization.png)

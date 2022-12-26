@@ -5,36 +5,15 @@ CREATE TABLE _user (
   id  SERIAL PRIMARY KEY,
   name  VARCHAR(30) NOT NULL ,
   phone CHAR(9) NOT NULL,
-  points  INT NOT NULL
+  points  INT DEFAULT 0 CHECK(points > 0) NOT NULL 
 );
 
 CREATE TABLE _order ( 
   id  SERIAL PRIMARY KEY,
-  user_id INT NOT NULL,
+  user_id INT CHECK(user_id > 0) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES _user (id),
   time  TIMESTAMP NOT NULL,
-  total_sum INT NOT NULL
-);
-
-CREATE TYPE food_type AS ENUM ('coffee', 'dessert');
-
-CREATE TABLE menu_item ( 
-  id SERIAL PRIMARY KEY,
-  name  VARCHAR(50) NOT NULL ,
-  food_type food_type NOT NULL,
-  description  VARCHAR(300) NOT NULL,
-  weight INT NOT NULL,
-  calories  INT NOT NULL,
-  price INT NOT NULL
-);
-
-CREATE TABLE order_menu_item ( 
-  id SERIAL PRIMARY KEY,
-  order_id INT NOT NULL,
-  menu_item_id  INT NOT NULL,
-  FOREIGN KEY (order_id) REFERENCES _order (id),
-  FOREIGN KEY (menu_item_id) REFERENCES menu_item (id),
-  amount  INT NOT NULL
+  total_sum REAL CHECK(total_sum > 0) NOT NULL
 );
 
 CREATE TABLE menu ( 
@@ -45,12 +24,27 @@ CREATE TABLE menu (
   menu_end_time  TIMESTAMP NOT NULL
 );
 
--- связь мгогие-ко-многим между menu и menu_item
-CREATE TABLE menu_menu_item (  
-    menu_id INT NOT NULL,
-    menu_item_id INT NOT NULL,
-    FOREIGN KEY (menu_id)  REFERENCES menu (id),
-    FOREIGN KEY (menu_item_id)  REFERENCES menu_item (id)
+CREATE TYPE food_type AS ENUM ('coffee', 'dessert', 'tea');
+
+CREATE TABLE menu_item ( 
+  id SERIAL PRIMARY KEY,
+  name  VARCHAR(50) NOT NULL ,
+  food_type food_type NOT NULL,
+  menu_id INT CHECK(menu_id > 0) NOT NULL,
+  FOREIGN KEY (menu_id) REFERENCES menu (id),
+  description  VARCHAR(300) NOT NULL,
+  weight INT CHECK(weight > 0) NOT NULL,
+  calories  INT CHECK(calories > 0) NOT NULL,
+  price REAL CHECK(price > 0) NOT NULL
+);
+
+CREATE TABLE order_menu_item ( 
+  id SERIAL PRIMARY KEY,
+  order_id INT CHECK(order_id > 0) NOT NULL,
+  menu_item_id INT CHECK(menu_item_id > 0) NOT NULL,
+  FOREIGN KEY (order_id) REFERENCES _order (id),
+  FOREIGN KEY (menu_item_id) REFERENCES menu_item (id),
+  amount  INT DEFAULT 1 NOT NULL
 );
 
 CREATE TABLE product ( 
@@ -58,13 +52,13 @@ CREATE TABLE product (
   name  VARCHAR(50) NOT NULL ,
   description  VARCHAR(300) NOT NULL,
   origin_country  VARCHAR(30) NOT NULL,
-  price_in_kg INT NOT NULL
+  price_in_kg REAL CHECK(price_in_kg > 0) NOT NULL
 );
 
 -- связь мгогие-ко-многим между menu_item и product
 CREATE TABLE menu_item_product (  
-    product_id    INT NOT NULL,
-    menu_item_id INT NOT NULL,
+    product_id  INT CHECK(product_id > 0) NOT NULL,
+    menu_item_id INT CHECK(menu_item_id > 0)NOT NULL,
     FOREIGN KEY (product_id)  REFERENCES product (id),
     FOREIGN KEY (menu_item_id)  REFERENCES menu_item (id)
 );
