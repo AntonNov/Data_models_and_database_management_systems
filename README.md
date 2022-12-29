@@ -40,20 +40,7 @@
 | menuItem_id      | INT > 0, NOT NULL           | ForeignKey на MenuItem    |
 | amount           | INT > 0, DEFAULT 1 NOT NULL |                           |
 
-Enum food_type (сoffee, dessert, tea)
-
-- **MenuItem**
-
-| Название    | Описание              | Дополнительная информация |
-| ----------- | --------------------- | ------------------------- |
-| menuItem_id | SERIAL NOT NULL       | PrimaryKey                |
-| name        | VARCHAR(50) NOT NULL  |                           |
-| food_type   | ENUM food_type        |                           |
-| menu_id     | INT > 0, NOT NULL     | ForeignKey на Menu        |
-| description | VARCHAR(300) NOT NULL |                           |
-| weight      | INT >0, NOT NULL      |
-| calories    | INT > 0, NOT NULL     |                           |
-| price       | REAL > 0, NOT NULL    |                           |
+Enum food_type (сoffee, dessert, tea, lemonade)
 
 - **Menu**
 
@@ -64,6 +51,19 @@ Enum food_type (сoffee, dessert, tea)
 | description     | VARCHAR(300) NOT NULL |                           |
 | menu_start_time | TIMESTAMP NOT NULL    |                           |
 | menu_end_time   | TIMESTAMP NOT NULL    |                           |
+
+- **MenuItem**
+
+| Название    | Описание                    | Дополнительная информация |
+| ----------- | --------------------------- | ------------------------- |
+| menuItem_id | SERIAL NOT NULL             | PrimaryKey                |
+| name        | VARCHAR(50) NOT NULL        |                           |
+| food_type   | ENUM food_type              |                           |
+| menu_id     | INT > 0, DEFAULT 1 NOT NULL | ForeignKey на Menu        |
+| description | VARCHAR(300) NOT NULL       |                           |
+| weight      | INT >0, NOT NULL            |
+| calories    | INT > 0, NOT NULL           |                           |
+| price       | REAL > 0, NOT NULL          |                           |
 
 - **Product**
 
@@ -81,9 +81,8 @@ Enum food_type (сoffee, dessert, tea)
 Функциональные требования к проекту:
 
 - CRUD пользователя
-- магазин, в котором можно покупать кофе/десерты за бонусы
-- возможность заказа кофе/десерта через сайт
-- framework Django
+<!-- - магазин, в котором можно покупать кофе/десерты за бонусы
+- возможность заказа кофе/десерта через сайт -->
 - БД Postgresql
 
 ## Теория
